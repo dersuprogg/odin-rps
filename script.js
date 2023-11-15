@@ -2,6 +2,9 @@ const choicesBtn = document.querySelectorAll(".btn");
 const playerScoreSpan = document.querySelector(".player-score");
 const computerScoreSpan = document.querySelector(".computer-score");
 const board = document.querySelector(".board");
+const resetBtn = document.querySelector(".reset-btn");
+
+resetBtn.style.visibility = "hidden";
 
 const choices = ["rock", "paper", "scissors"];
 
@@ -51,6 +54,20 @@ function checkWinner(player1, player2) {
   }
 }
 
+function resetGame() {
+  choicesBtn.forEach((btn) => {
+    btn.removeAttribute("disabled");
+    player.score = 0;
+    playerScoreSpan.textContent = player.score;
+    computer.score = 0;
+    computerScoreSpan.textContent = computer.score;
+    board.textContent = "";
+    resetBtn.style.visibility = "hidden";
+  });
+}
+
+resetBtn.addEventListener("click", resetGame);
+
 choicesBtn.forEach((btn) => {
   btn.addEventListener("click", function () {
     const playerChoice = btn.innerText.toLowerCase();
@@ -65,6 +82,7 @@ choicesBtn.forEach((btn) => {
       choicesBtn.forEach((btn) => {
         btn.setAttribute("disabled", true);
       });
+      resetBtn.style.visibility = "visible";
     } else {
       board.textContent = msg;
     }
