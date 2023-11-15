@@ -19,7 +19,7 @@ const player = {
   score: 0,
 };
 const computer = {
-  name: "Player",
+  name: "Computer",
   score: 0,
 };
 
@@ -59,7 +59,14 @@ choicesBtn.forEach((btn) => {
 
     playerScoreSpan.textContent = player.score;
     computerScoreSpan.textContent = computer.score;
-
-    board.textContent = msg;
+    if (player.score == 5 || computer.score == 5) {
+      const winner = checkWinner(player, computer);
+      board.textContent = `We have a winner: ${winner}`;
+      choicesBtn.forEach((btn) => {
+        btn.setAttribute("disabled", true);
+      });
+    } else {
+      board.textContent = msg;
+    }
   });
 });
